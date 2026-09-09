@@ -1,0 +1,162 @@
+{
+	"Anchor" : "Center",
+	"Childs" : 
+	[
+		{
+			"Childs" : 
+			[
+				{
+					"Caption" : "ITEMS CASE",
+					"Childs" : [],
+					"FontName" : "SM_HeaderLarge_Wide",
+					"Name" : "Title",
+					"NeedKey" : false,
+					"NeedMouse" : false,
+					"Skin" : "TextBox",
+					"TextAlign" : "Center",
+					"Type" : "TextBox",
+					"height" : 30,
+					"width" : 600,
+					"x" : 0,
+					"y" : 20
+				},
+				{
+					"Childs" : [],
+					"LayoutRule" : "Absolute",
+					"Name" : "Reel",
+					"NeedKey" : false,
+					"NeedMouse" : false,
+					"Skin" : "PanelEmpty",
+					"Type" : "Widget",
+					"height" : 108,
+					"width" : 600,
+					"x" : 0,
+					"y" : 70
+				},
+				{
+					"Childs" : 
+					[
+						{
+							"Childs" : [],
+							"NeedKey" : false,
+							"NeedMouse" : false,
+							"Skin" : "AlarmClockArrowDown",
+							"Type" : "Widget",
+							"height" : 24,
+							"width" : 24,
+							"x" : 0,
+							"y" : 0
+						}
+					],
+					"LayoutRule" : "Center",
+					"Name" : "Arrow Down",
+					"NeedKey" : false,
+					"NeedMouse" : false,
+					"Skin" : "PanelEmpty",
+					"Type" : "Widget",
+					"height" : 24,
+					"width" : 600,
+					"x" : 0,
+					"y" : 58
+				},
+				{
+					"Childs" : 
+					[
+						{
+							"Childs" : [],
+							"NeedKey" : false,
+							"NeedMouse" : false,
+							"Skin" : "AlarmClockArrowUp",
+							"Type" : "Widget",
+							"height" : 24,
+							"width" : 24,
+							"x" : 0,
+							"y" : 0
+						}
+					],
+					"LayoutRule" : "Center",
+					"Name" : "Arrow Up",
+					"NeedKey" : false,
+					"NeedMouse" : false,
+					"Skin" : "PanelEmpty",
+					"Type" : "Widget",
+					"height" : 24,
+					"width" : 600,
+					"x" : 0,
+					"y" : 166
+				},
+				{
+					"Childs" : 
+					[
+						{
+							"Childs" : 
+							[
+								{
+									"Caption" : "#{UNLOCK}",
+									"Childs" : [],
+									"FontName" : "SM_ButtonSmall",
+									"Name" : "UnlockText",
+									"NeedKey" : false,
+									"NeedMouse" : false,
+									"Skin" : "TextBox",
+									"TextAlign" : "Center",
+									"Type" : "TextBox",
+									"height" : 50,
+									"width" : 120,
+									"x" : 0,
+									"y" : 0
+								}
+							],
+							"LayoutRule" : "Center",
+							"Name" : "UnlockButton",
+							"NeedKey" : false,
+							"NeedMouse" : true,
+							"OnClickEffect" : "Gui - Click",
+							"OnFocusEffect" : "Gui - Highlight",
+							"Skin" : "SettingsButton",
+							"StateSelected" : true,
+							"Type" : "Button",
+							"height" : 50,
+							"onClick" : "cl_onUnlockClick",
+							"width" : 120,
+							"x" : 0,
+							"y" : 0
+						}
+					],
+					"LayoutRule" : "Center",
+					"Name" : "Buttons",
+					"NeedKey" : false,
+					"NeedMouse" : true,
+					"Skin" : "PanelEmpty",
+					"Type" : "Widget",
+					"height" : 50,
+					"width" : 600,
+					"x" : 0,
+					"y" : 205
+				}
+			],
+			"LayoutRule" : "Absolute",
+			"Name" : "Background",
+			"NeedKey" : false,
+			"NeedMouse" : true,
+			"Skin" : "BackgroundInteractableWide",
+			"Type" : "Widget",
+			"height" : 275,
+			"width" : 600,
+			"x" : 0,
+			"y" : 0
+		}
+	],
+	"LayoutRule" : "Absolute",
+	"Name" : "MainPanel",
+	"NeedKey" : false,
+	"NeedMouse" : true,
+	"Skin" : "PanelEmpty",
+	"Type" : "Widget",
+	"Visible" : true,
+	"height" : 275,
+	"onClose" : "cl_onClose",
+	"width" : 600,
+	"x" : 0,
+	"y" : 0
+}

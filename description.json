@@ -1,0 +1,9 @@
+{
+	"allow_add_mods" : true,
+	"custom_icons" : false,
+	"description" : "This mod doesn't have a description",
+	"localId" : "c5b0dbb5-6e03-450b-acb1-03fe5909ecc0",
+	"name" : "Items Case",
+	"type" : "Blocks and Parts",
+	"version" : 2
+}

@@ -1,0 +1,45 @@
+{
+	"Anchor" : "Center",
+	"Childs" : 
+	[
+		{
+			"Childs" : 
+			[
+				{
+					"Childs" : [],
+					"Name" : "Icon",
+					"NeedKey" : false,
+					"NeedMouse" : false,
+					"Skin" : "ImageBox",
+					"Type" : "ImageBox",
+					"height" : 74,
+					"width" : 74,
+					"x" : 0,
+					"y" : 0
+				}
+			],
+			"ImageTexture" : "Hideout/gui_hideout_bgitem_grey.png",
+			"LayoutRule" : "Center",
+			"Name" : "Slot",
+			"NeedKey" : false,
+			"NeedMouse" : false,
+			"Skin" : "ImageBox",
+			"Type" : "ImageBox",
+			"height" : 108,
+			"width" : 108,
+			"x" : 0,
+			"y" : 0
+		}
+	],
+	"LayoutRule" : "Absolute",
+	"Name" : "MainPanel",
+	"NeedKey" : false,
+	"NeedMouse" : false,
+	"Skin" : "PanelEmpty",
+	"Type" : "Widget",
+	"Visible" : true,
+	"height" : 108,
+	"width" : 108,
+	"x" : 0,
+	"y" : 0
+}
