@@ -26,7 +26,7 @@
 				"classname" : "ItemsCase",
 				"data" : 
 				{
-					"rare" : 
+					"rarity" : 
 					[
 						"rare",
 						"epic",
@@ -62,7 +62,7 @@
 				"classname" : "ItemsCase",
 				"data" : 
 				{
-					"rare" : 
+					"rarity" : 
 					[
 						"common",
 						"uncommon"
