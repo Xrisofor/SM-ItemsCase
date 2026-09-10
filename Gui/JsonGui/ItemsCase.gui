@@ -31,59 +31,7 @@
 					"height" : 108,
 					"width" : 600,
 					"x" : 0,
-					"y" : 70
-				},
-				{
-					"Childs" : 
-					[
-						{
-							"Childs" : [],
-							"NeedKey" : false,
-							"NeedMouse" : false,
-							"Skin" : "AlarmClockArrowDown",
-							"Type" : "Widget",
-							"height" : 24,
-							"width" : 24,
-							"x" : 0,
-							"y" : 0
-						}
-					],
-					"LayoutRule" : "Center",
-					"Name" : "Arrow Down",
-					"NeedKey" : false,
-					"NeedMouse" : false,
-					"Skin" : "PanelEmpty",
-					"Type" : "Widget",
-					"height" : 24,
-					"width" : 600,
-					"x" : 0,
-					"y" : 58
-				},
-				{
-					"Childs" : 
-					[
-						{
-							"Childs" : [],
-							"NeedKey" : false,
-							"NeedMouse" : false,
-							"Skin" : "AlarmClockArrowUp",
-							"Type" : "Widget",
-							"height" : 24,
-							"width" : 24,
-							"x" : 0,
-							"y" : 0
-						}
-					],
-					"LayoutRule" : "Center",
-					"Name" : "Arrow Up",
-					"NeedKey" : false,
-					"NeedMouse" : false,
-					"Skin" : "PanelEmpty",
-					"Type" : "Widget",
-					"height" : 24,
-					"width" : 600,
-					"x" : 0,
-					"y" : 166
+					"y" : 71
 				},
 				{
 					"Childs" : 
@@ -145,6 +93,58 @@
 			"width" : 600,
 			"x" : 0,
 			"y" : 0
+		},
+		{
+			"Childs" : 
+			[
+				{
+					"Childs" : [],
+					"NeedKey" : false,
+					"NeedMouse" : false,
+					"Skin" : "AlarmClockArrowDown",
+					"Type" : "Widget",
+					"height" : 24,
+					"width" : 24,
+					"x" : 0,
+					"y" : 0
+				}
+			],
+			"LayoutRule" : "Center",
+			"Name" : "Arrow Down",
+			"NeedKey" : false,
+			"NeedMouse" : false,
+			"Skin" : "PanelEmpty",
+			"Type" : "Widget",
+			"height" : 24,
+			"width" : 600,
+			"x" : 0,
+			"y" : 58
+		},
+		{
+			"Childs" : 
+			[
+				{
+					"Childs" : [],
+					"NeedKey" : false,
+					"NeedMouse" : false,
+					"Skin" : "AlarmClockArrowDown",
+					"Type" : "Widget",
+					"height" : 24,
+					"width" : 24,
+					"x" : 0,
+					"y" : 0
+				}
+			],
+			"LayoutRule" : "Center",
+			"Name" : "Arrow Up",
+			"NeedKey" : false,
+			"NeedMouse" : false,
+			"Skin" : "PanelEmpty",
+			"Type" : "Widget",
+			"height" : 24,
+			"width" : 600,
+			"x" : 0,
+			"y" : 166
 		}
 	],
 	"LayoutRule" : "Absolute",
