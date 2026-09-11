@@ -18,6 +18,7 @@ end
 function SpinManager.sv_onCreate( self )
     self.sv = {
         activeSpin = nil,
+        reel = nil,
     }
 end
 
@@ -61,8 +62,11 @@ function SpinManager.sv_onSpinRequest( self, params, player )
         return
     end
 
-    local reelTape = buildReel( self )
-    local winEntry = reelTape[SpinManager.Settings.WinIndex]
+    if not self.sv.reel then
+        self.sv.reel = buildReel( self )
+    end
+
+    local winEntry = self.sv.reel[SpinManager.Settings.WinIndex]
 
     self.sv.activeSpin = {
         player = player,
@@ -72,17 +76,18 @@ function SpinManager.sv_onSpinRequest( self, params, player )
     }
 
     self.network:sendToClient( player, "client_onSpinStarted", {
-        reel = reelTape,
         winIndex = SpinManager.Settings.WinIndex,
         duration = SpinManager.Settings.SpinDuration,
     } )
 end
 
 function SpinManager.sv_onPreviewRequest( self, params, player )
-    local reelTape = buildReel( self )
+    if not self.sv.reel then
+        self.sv.reel = buildReel( self )
+    end
 
     self.network:sendToClient( player, "client_onPreviewReel", {
-        reel = reelTape,
+        reel = self.sv.reel,
     } )
 end
 
@@ -108,7 +113,6 @@ function SpinManager.sv_giveReward( self, player, itemUuid, quantity )
 end
 
 function SpinManager.cl_onSpinStarted( self, data )
-    self.cl.reel = data.reel
     self.cl.winIndex = data.winIndex
     self.cl.spinDuration = data.duration or SpinManager.Settings.SpinDuration
     self.cl.spinTimer = 0
@@ -158,7 +162,8 @@ end
 function SpinManager.cl_onPreviewReel( self, data )
     self.cl.reel = data.reel
 
-    if not self.cl.spinning then
+    if self.cl.jsonGui then
+        GuiManager.cl_addSlots( self )
         GuiManager.cl_updateSlots( self, self.cl.currentScrollX or 0 )
         GuiManager.cl_render( self )
     end

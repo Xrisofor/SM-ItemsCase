@@ -21,7 +21,9 @@ function GuiManager.cl_onInteract( self, character, state )
     if not self.cl.jsonGui then
         self.cl.jsonGui = sm.jsonGui.createGui( { isInteractive = true, needsCursor = true } )
         
-        GuiManager.cl_addSlots( self )
+        if self.cl.reel and #self.cl.reel > 0 then
+            GuiManager.cl_addSlots( self )
+        end
     end
 
     if not self.cl.spinning then
@@ -35,6 +37,7 @@ function GuiManager.cl_onClose( self )
     if self.cl.jsonGui then
         self.cl.jsonGui:close()
         self.cl.jsonGui = nil
+        Slots = {}
     end
 end
 
