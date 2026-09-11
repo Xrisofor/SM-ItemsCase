@@ -127,11 +127,11 @@
 					"Childs" : [],
 					"NeedKey" : false,
 					"NeedMouse" : false,
-					"Skin" : "AlarmClockArrowDown",
+					"Skin" : "AlarmClockArrowUp",
 					"Type" : "Widget",
 					"height" : 24,
 					"width" : 24,
-					"x" : 0,
+					"x" : 1,
 					"y" : 0
 				}
 			],

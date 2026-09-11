@@ -1,4 +1,3 @@
-dofile( "$GAME_DATA/Scripts/game/managers/NotificationManager.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_loot.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 
