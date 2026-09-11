@@ -1,3 +1,4 @@
+dofile( "$GAME_DATA/Scripts/game/managers/NotificationManager.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/game/survival_loot.lua" )
 dofile( "$SURVIVAL_DATA/Scripts/util.lua" )
 
@@ -7,6 +8,7 @@ dofile( "$CONTENT_DATA/Scripts/game/managers/GuiManager.lua" )
 dofile( "$CONTENT_DATA/Scripts/game/managers/SpinManager.lua" )
 
 ItemsCase = class()
+ItemsCase.poseWeightCount = 1
 
 function ItemsCase.server_onCreate( self )
     SpinManager.sv_onCreate( self )
@@ -40,10 +42,22 @@ function ItemsCase.client_onCreate( self )
     }
 
     self.network:sendToServer( "server_onPreviewRequest" )
+
+    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("efb2837c-f1d2-412b-bff1-a210b3426fd9") ) )
+    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("9dcd7de9-477c-4334-80e8-42e2edb221cf") ) )
+    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("b41de15e-a136-425a-a730-889b58cf4466") ) )
+    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("5530e6a0-4748-4926-b134-50ca9ecb9dcf") ) )
+    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("1897ee42-0291-43e4-9645-8c5a5d310398") ) )
+    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("061b5d4b-0a6a-4212-b0ae-9e9681f1cbfb") ) )
 end
 
-function ItemsCase.server_canErase( self )
-	return self.sv.activeSpin == nil
+function ItemsCase.client_canErase( self )
+	if self.cl.spinning then
+        sm.gui.displayAlertText( "#{INFO_BUSY}" )
+		return false
+	end
+
+	return true
 end
 
 function ItemsCase.client_onDestroy( self )
@@ -72,10 +86,6 @@ end
 
 function ItemsCase.client_onSpinStarted( self, data )
     SpinManager.cl_onSpinStarted( self, data )
-end
-
-function ItemsCase.client_onSpinFinished( self, data )
-    SpinManager.cl_onSpinFinished( self, data )
 end
 
 function ItemsCase.client_onPreviewReel( self, data )

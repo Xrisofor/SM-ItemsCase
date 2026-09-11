@@ -1,26 +1,31 @@
 import os
+import numpy as np
 from PIL import Image, ImageEnhance
 
-def recolor_frame(img, hue_deg, sat_mult=1.0, val_mult=1.0, is_grey=False):
+def recolor_frame(img, hue_deg=0, sat_mult=1.0, val_mult=1.0, gradient_hue=None):
     r, g, b, a = img.split()
     rgb_img = Image.merge("RGB", (r, g, b))
 
     hsv_img = rgb_img.convert("HSV")
-    h, s, v = hsv_img.split()
-
-    if is_grey:
-        new_s = Image.new("L", s.size, 0)
-        v_enhanced = ImageEnhance.Brightness(v).enhance(val_mult)
-        new_hsv = Image.merge("HSV", (h, new_s, v_enhanced))
+    _, s, v = hsv_img.split()
+    width, height = img.size
+    if gradient_hue:
+        start_deg, end_deg = gradient_hue
+        x = np.linspace(0, 1, width)
+        y = np.linspace(0, 1, height)
+        xx, yy = np.meshgrid(x, y)
+        
+        diag = (xx + yy) / 2.0
+        h_array = (start_deg + (end_deg - start_deg) * diag) % 360.0
+        new_h = Image.fromarray((h_array / 360.0 * 255).astype(np.uint8), mode="L")
     else:
         target_h = int((hue_deg % 360) / 360.0 * 255)
-        new_h = Image.new("L", h.size, target_h)
-        
-        s_enhanced = ImageEnhance.Color(Image.merge("RGB", (s, s, s))).enhance(sat_mult).split()[0]
-        v_enhanced = ImageEnhance.Brightness(v).enhance(val_mult)
-        
-        new_hsv = Image.merge("HSV", (new_h, s_enhanced, v_enhanced))
+        new_h = Image.new("L", (width, height), target_h)
 
+    new_s = s.point(lambda p: min(255, int(p * sat_mult)))
+    new_v = ImageEnhance.Brightness(v).enhance(val_mult)
+    
+    new_hsv = Image.merge("HSV", (new_h, new_s, new_v))
     new_rgb = new_hsv.convert("RGB")
     r2, g2, b2 = new_rgb.split()
     
@@ -38,33 +43,33 @@ def generate_rarity_icons(image_path="Icon.png", output_dir="Rarity"):
 
     rarities = {
         "common": {
-            "is_grey": True,
-            "val_mult": 0.85,
-            "hue_deg": 0
+            "sat_mult": 0.0,
+            "val_mult": 0.85
         },
         "uncommon": {
             "hue_deg": 125,
             "sat_mult": 1.1,
-            "val_mult": 1.0,
-            "is_grey": False
+            "val_mult": 1.0
         },
         "rare": {
             "hue_deg": 215,
             "sat_mult": 1.15,
-            "val_mult": 1.0,
-            "is_grey": False
+            "val_mult": 1.0
         },
         "epic": {
             "hue_deg": 285,
             "sat_mult": 1.2,
-            "val_mult": 0.98,
-            "is_grey": False
+            "val_mult": 0.98
         },
         "legendary": {
             "hue_deg": 38,
             "sat_mult": 1.0,
-            "val_mult": 1.0,
-            "is_grey": False
+            "val_mult": 1.0
+        },
+        "mythic": {
+            "gradient_hue": (295, 175),
+            "sat_mult": 1.3,
+            "val_mult": 1.12
         }
     }
 
@@ -74,7 +79,7 @@ def generate_rarity_icons(image_path="Icon.png", output_dir="Rarity"):
             hue_deg=settings.get("hue_deg", 0),
             sat_mult=settings.get("sat_mult", 1.0),
             val_mult=settings.get("val_mult", 1.0),
-            is_grey=settings.get("is_grey", False)
+            gradient_hue=settings.get("gradient_hue", None)
         )
         
         output_path = os.path.join(output_dir, f"{rarity}.png")

@@ -7,7 +7,7 @@ SpinManager.Settings = {
     PoolSize = 12,
     SpinDuration = 220 / 40,
     TickEffect = "Gui - Click",
-    DestroyActiveEffect = "PropaneTank - ActivateSmall",
+    StartEffect = "Gui - ChestOpen",
     DestroyEffect = "PropaneTank - ExplosionSmall",
 }
 
@@ -34,7 +34,7 @@ function SpinManager.sv_onFixedUpdate( self )
     spin.ticksLeft = spin.ticksLeft - 1
 
     if spin.ticksLeft <= 0 then
-        SpinManager.sv_giveReward( self, spin.player, sm.uuid.new( spin.winUuid ), 1 )
+        SpinManager.sv_giveReward( self, spin.player, sm.uuid.new( spin.winUuid ), spin.winQuantity )
         self.sv.activeSpin = nil
     end
 end
@@ -46,7 +46,11 @@ local function buildReel( self )
     local reelTape = {}
     for i = 1, SpinManager.Settings.ReelLength do
         local block = blockPool[math.random( 1, #blockPool )]
-        table.insert( reelTape, { uuid = block, rarity = RarityManager.getRarity( block ) } )
+        table.insert( reelTape, {
+            uuid = block,
+            rarity = RarityManager.getRarity( block ),
+            quantity = RarityManager.getItemQuantity( block )
+        } )
     end
 
     return reelTape
@@ -64,6 +68,7 @@ function SpinManager.sv_onSpinRequest( self, params, player )
         player = player,
         ticksLeft = SpinManager.Settings.SpinTicks,
         winUuid = winEntry.uuid,
+        winQuantity = winEntry.quantity or 1,
     }
 
     self.network:sendToClient( player, "client_onSpinStarted", {
@@ -89,15 +94,14 @@ function SpinManager.sv_giveReward( self, player, itemUuid, quantity )
     sm.container.beginTransaction()
     sm.container.collect( player:getInventory(), itemUuid, quantity )
 
-    if sm.container.endTransaction() then
-        self.network:sendToClient( player, "client_onSpinFinished", { success = true, itemUuid = itemUuid } )
-    else
+    if not sm.container.endTransaction() then
         local char = player:getCharacter()
         local dropPos = char and char.worldPosition or self.shape.worldPosition
 
         SpawnLoot( player, { { uuid = itemUuid, quantity = quantity or 1, epic = false } }, dropPos, nil, 2 )
-        self.network:sendToClient( player, "client_onSpinFinished", { success = true, itemUuid = itemUuid, full = true } )
     end
+
+    -- NotificationManager.Sv_SchematicUnlocked( itemUuid )
 
     sm.effect.playEffect( SpinManager.Settings.DestroyEffect, self.shape.worldPosition )
     self.shape:destroyShape( 0 )
@@ -116,8 +120,11 @@ function SpinManager.cl_onSpinStarted( self, data )
 
     self.cl.lastCenterIndex = getCenterSlotIndex( self.cl.currentScrollX or 0 )
 
-    sm.effect.playEffect( SpinManager.Settings.DestroyActiveEffect, self.shape.worldPosition )
-    GuiManager.cl_onSpinStarted( self )    
+    if ( self.poseWeightCount or 0 ) > 0 then
+        self.interactable:setPoseWeight( 0, 1 )
+    end
+
+    sm.effect.playEffect( SpinManager.Settings.StartEffect, self.shape.worldPosition )
 end
 
 function SpinManager.cl_onUpdate( self, deltaTime )
@@ -146,14 +153,6 @@ function SpinManager.cl_onUpdate( self, deltaTime )
     if progress >= 1.0 then
         self.cl.spinning = false
     end
-end
-
-function SpinManager.cl_onSpinFinished( self, data )
-    if data and data.full then
-        sm.gui.displayAlertText( "#{INFO_INVENTORY_FULL}" )
-    end
-
-    GuiManager.cl_onSpinFinished( self, data )
 end
 
 function SpinManager.cl_onPreviewReel( self, data )

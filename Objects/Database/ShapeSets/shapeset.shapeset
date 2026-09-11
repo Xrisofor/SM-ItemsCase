@@ -30,7 +30,8 @@
 					[
 						"rare",
 						"epic",
-						"legendary"
+						"legendary",
+						"mythic"
 					]
 				},
 				"filename" : "$CONTENT_DATA/Scripts/game/ItemsCase.lua"

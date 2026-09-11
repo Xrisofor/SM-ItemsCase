@@ -27,10 +27,12 @@ local function addSlots( reelWidget )
 
         local Slot = FindWidget( Item, "Slot" )
         local Icon = FindWidget( Item, "Icon" )
+        local Quantity = FindWidget( Item, "Quantity" )
 
         if Slot and Icon then
             Slot.Name = "Slot_" .. i
             Icon.Name = "Icon_" .. i
+            Quantity.Name = "Quantity_" .. i
 
             table.insert( reelWidget.Childs, Item )
 
@@ -38,6 +40,7 @@ local function addSlots( reelWidget )
                 Item = Item,
                 Slot = Slot,
                 Icon = Icon,
+                Quantity = Quantity,
             }
         end
     end
@@ -99,13 +102,16 @@ function GuiManager.cl_updateSlots( self, scrollX )
             if itemIndex >= 1 and itemIndex <= #self.cl.reel then
                 local posX = math.floor( ( ( itemIndex - 1 ) * GuiManager.Settings.SlotWidth ) - scrollX )
                 slotData.Item.x = posX
-                slotData.Item.Visible = true
 
                 local entry = self.cl.reel[itemIndex]
 
-                if slotData.lastEntry ~= entry then
-                    slotData.lastEntry = entry
+                if slotData.LastEntry ~= entry then
+                    slotData.LastEntry = entry
+
                     slotData.Slot.ImageTexture = "$CONTENT_c5b0dbb5-6e03-450b-acb1-03fe5909ecc0/Gui/Rarity/" .. entry.rarity .. ".png"
+                    slotData.Quantity.Caption = entry.quantity and tostring( entry.quantity ) or ""
+
+                    slotData.Slot.RenderDepth = 0
 
                     local resource, group, name = sm.gui.getItemIconFromUuid( sm.uuid.new( entry.uuid ) )
                     if resource then
@@ -115,14 +121,9 @@ function GuiManager.cl_updateSlots( self, scrollX )
                     end
                 end
             else
-                slotData.Item.Visible = false
                 slotData.Item.x = -999
-                slotData.lastEntry = nil
+                slotData.LastEntry = nil
             end
         end
     end
-end
-
-function GuiManager.cl_onSpinFinished( self, data )
-    GuiManager.cl_render( self )
 end

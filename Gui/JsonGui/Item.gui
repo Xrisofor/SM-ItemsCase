@@ -16,6 +16,21 @@
 					"width" : 74,
 					"x" : 0,
 					"y" : 0
+				},
+				{
+					"Caption" : "10",
+					"Childs" : [],
+					"FontName" : "SM_NumberSmall",
+					"Name" : "Quantity",
+					"NeedKey" : false,
+					"NeedMouse" : false,
+					"Skin" : "TextBox",
+					"TextAlign" : "Right",
+					"Type" : "TextBox",
+					"height" : 10,
+					"width" : 55,
+					"x" : 9,
+					"y" : 32
 				}
 			],
 			"ImageTexture" : "Hideout/gui_hideout_bgitem_grey.png",
