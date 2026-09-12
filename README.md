@@ -34,7 +34,7 @@ Item rarity isn't set manually (with a few exceptions, see below) - it's calcula
 
 Each rarity's chance is its weight (45 / 27 / 18 / 7.8 / 2 / 0.2), normalized among only the rarities allowed in that particular case. That's why different case types have different percentages:
 
-| Rarity | Items Case (trash) | Items Case | Special Items Case |
+| Rarity | Scrap Items Case | Items Case | Special Items Case |
 | :--- | :---: | :---: | :---: |
 | ⚪ Common | 62.5% | - | - |
 | 🟢 Uncommon | 37.5% | - | - |
