@@ -41,6 +41,11 @@ RARITY_OVERRIDES = {
     ["41db3e10-7b8f-4ff3-81f3-4f240f1f3cce"] = "legendary", -- obj_resource_refinedcoralium
     ["d69139ee-5b7f-479a-b9c1-6549017a1ea1"] = "legendary", -- obj_resource_refinednimbolium
     ["bd4b7d66-9d4b-433e-bff9-410cb5baafc3"] = "legendary", -- obj_resource_refinedlemonium
+    ["a736ffdf-22c1-40f2-8e40-988cab7c0559"] = "legendary", -- obj_interactive_thruster_05
+    ["e6db321c-6f98-47f6-9f7f-4e6794a62cb8"] = "legendary", -- obj_interactive_thruster_04
+    ["4a3d40d4-ce86-4a68-b042-8d107ea39d78"] = "legendary", -- obj_interactive_plasmadrill_lvl3
+    ["42b4c02e-2de5-431e-981a-f42cb7829e68"] = "legendary", -- obj_interactive_turretseat_05_sphere
+    ["7f3eae8d-3dd1-47f6-94de-0450c86e4af0"] = "legendary", -- obj_interactive_turretseat_04_sphere
 
     -- Epic
     ["b41de15e-a136-425a-a730-889b58cf4466"] = "epic", -- obj_consumable_multicomponent
@@ -75,6 +80,12 @@ RARITY_OVERRIDES = {
     ["3be58cc4-04b4-455d-a9c3-8a8fd262b6d6"] = "epic", -- obj_resource_coralium
     ["c108d189-87ff-41d1-8d61-667769924a34"] = "epic", -- obj_resource_quartz
     ["84fdb4ca-46cd-424b-b608-0998741941dc"] = "epic", -- obj_resource_crystal
+    ["9fc793b2-250b-40ab-bcb3-97cf97c7b481"] = "epic", -- obj_interactive_thruster_02
+    ["4c1cc8de-7af1-4f8e-a5c4-c583460af9e5"] = "epic", -- obj_interactive_thruster_03
+    ["660c50e1-081d-449c-a405-785d4c26328d"] = "epic", -- obj_interactive_plasmadrill_lvl2
+    ["c227ba7c-171c-4a7c-b5e4-faa84d44f03a"] = "epic", -- obj_interactive_turretseat_03_sphere
+    ["05f3a5a4-532a-4642-b648-e0dd60ce9f4d"] = "epic", -- obj_interactive_turretseat_02_sphere
+    -- ["03bdd942-c808-4795-aa0b-554fa98c3c74"] = "epic", -- obj_interactive_boombox
 
     -- Rare
     ["5530e6a0-4748-4926-b134-50ca9ecb9dcf"] = "rare", -- obj_consumable_component
@@ -88,6 +99,7 @@ RARITY_OVERRIDES = {
     ["3a3280e4-03b6-4a4d-9e02-e348478213c9"] = "rare", -- obj_consumable_glowstick
     ["68a58472-368d-4b09-ad36-9093f11d76ae"] = "rare", -- obj_consumable_fireammo
     ["63695efd-0862-49f2-ace6-4d1758147fae"] = "rare", -- obj_outfitpackage_common
+    ["4152ce33-9b43-4c51-80a3-e0b4fe38841d"] = "rare", -- obj_interactive_raftshark
 
     -- Uncommon
     ["deabb19a-1acd-4bbf-8bd2-f8f17410170b"] = "uncommon", -- obj_containers_cowcrate

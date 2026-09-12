@@ -96,13 +96,40 @@ local function buildReel( self )
         return {}
     end
 
+    local minDistance = math.min( 4, math.max( 1, #itemPool - 1 ) )
     local reelTape = {}
+
     for i = 1, SpinManager.Settings.ReelLength do
-        local item = itemPool[math.random( 1, #itemPool )]
+        local recent = {}
+        for back = 1, minDistance do
+            local prev = reelTape[i - back]
+            if prev then
+                recent[tostring( prev.uuid )] = true
+            end
+        end
+
+        local candidates = {}
+        for _, item in ipairs( itemPool ) do
+            if not recent[tostring( item )] then
+                table.insert( candidates, item )
+            end
+        end
+
+        if #candidates == 0 then
+            local lastUuid = reelTape[i - 1] and tostring( reelTape[i - 1].uuid )
+            for _, item in ipairs( itemPool ) do
+                if tostring( item ) ~= lastUuid or #itemPool == 1 then
+                    table.insert( candidates, item )
+                end
+            end
+        end
+
+        local chosenItem = candidates[math.random( 1, #candidates )]
+
         table.insert( reelTape, {
-            uuid = item,
-            rarity = RarityManager.getRarity( item ),
-            quantity = RarityManager.getItemQuantity( item )
+            uuid = chosenItem,
+            rarity = RarityManager.getRarity( chosenItem ),
+            quantity = RarityManager.getItemQuantity( chosenItem )
         } )
     end
 

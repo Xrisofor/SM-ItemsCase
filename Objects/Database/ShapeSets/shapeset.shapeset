@@ -10,14 +10,14 @@
 			},
 			"color" : "df7f01",
 			"flammable" : false,
-			"name" : "obj_items_case_high",
+			"name" : "obj_items_case",
 			"physicsMaterial" : "Mechanical",
 			"ratings" : 
 			{
-				"buoyancy" : 8,
+				"buoyancy" : 6,
 				"density" : 4,
 				"durability" : 6,
-				"friction" : 5
+				"friction" : 4
 			},
 			"renderable" : "$SURVIVAL_DATA/Objects/Renderable/interactive/obj_interactive_smallchest.rend",
 			"rotationSet" : "PropYZ",
@@ -57,10 +57,10 @@
 			"physicsMaterial" : "Wood",
 			"ratings" : 
 			{
-				"buoyancy" : 8,
-				"density" : 6,
-				"durability" : 3,
-				"friction" : 5
+				"buoyancy" : 6,
+				"density" : 4,
+				"durability" : 6,
+				"friction" : 4
 			},
 			"renderable" : "$SURVIVAL_DATA/Objects/Renderable/interactive/obj_interactive_scrapchest.rend",
 			"rotationSet" : "PropYZ",
@@ -84,6 +84,70 @@
 				"filename" : "$CONTENT_DATA/Scripts/game/ItemsCase.lua"
 			},
 			"uuid" : "689a5481-ae07-435d-aef7-bfd92a4183e2"
+		},
+		{
+			"box" : 
+			{
+				"x" : 4,
+				"y" : 3,
+				"z" : 4
+			},
+			"color" : "df7f01",
+			"flammable" : false,
+			"name" : "obj_items_case_high",
+			"physicsMaterial" : "Mechanical",
+			"ratings" : 
+			{
+				"buoyancy" : 6,
+				"density" : 4,
+				"durability" : 6,
+				"friction" : 4
+			},
+			"renderable" : 
+			{
+				"lodList" : 
+				[
+					{
+						"mesh" : "$CHALLENGE_DATA/Objects/Mesh/interactive/obj_interactive_challengechest_off.fbx",
+						"pose0" : "$CHALLENGE_DATA/Objects/Mesh/interactive/obj_interactive_challengechest_on.fbx",
+						"subMeshList" : 
+						[
+							{
+								"material" : "PoseAnimDifAsgNor",
+								"textureList" : 
+								[
+									"$CHALLENGE_DATA/Objects/Textures/interactive/obj_interactive_challengechest_dif.tga",
+									"$CHALLENGE_DATA/Objects/Textures/interactive/obj_interactive_challengechest_asg.tga",
+									"$CHALLENGE_DATA/Objects/Textures/interactive/obj_interactive_challengechest_nor.tga"
+								]
+							}
+						]
+					}
+				]
+			},
+			"rotationSet" : "PropY",
+			"sticky" : "-Z-Y-X+X",
+			"scripted" : 
+			{
+				"classname" : "ItemsCase",
+				"data" : 
+				{
+					"rarity" : 
+					[
+						"epic",
+						"legendary",
+						"mythic"
+					],
+					"types" : 
+					[
+						"block",
+						"part",
+						"tool"
+					]
+				},
+				"filename" : "$CONTENT_DATA/Scripts/game/ItemsCase.lua"
+			},
+			"uuid" : "29987ffe-59fd-45f0-81f2-481d8572b10b"
 		}
 	]
 }
