@@ -41,13 +41,6 @@ function ItemsCase.client_onCreate( self )
     }
 
     self.network:sendToServer( "server_onPreviewRequest" )
-
-    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("efb2837c-f1d2-412b-bff1-a210b3426fd9") ) )
-    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("9dcd7de9-477c-4334-80e8-42e2edb221cf") ) )
-    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("b41de15e-a136-425a-a730-889b58cf4466") ) )
-    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("5530e6a0-4748-4926-b134-50ca9ecb9dcf") ) )
-    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("1897ee42-0291-43e4-9645-8c5a5d310398") ) )
-    print( "(Items Case) Test Quality Level: " .. sm.item.getQualityLevel( sm.uuid.new("061b5d4b-0a6a-4212-b0ae-9e9681f1cbfb") ) )
 end
 
 function ItemsCase.client_canErase( self )

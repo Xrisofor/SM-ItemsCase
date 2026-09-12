@@ -40,17 +40,69 @@ function SpinManager.sv_onFixedUpdate( self )
     end
 end
 
-local function buildReel( self )
+local function buildItemPool( self )
     local allowedTiers = self.data and self.data.rarity
-    local blockPool = RarityManager.getRandomBlocks( SpinManager.Settings.PoolSize, allowedTiers )
+    local allowedCategories = self.data and ( self.data.types or self.data.categories ) or { "block", "part", "tool" }
+    local fetchers = RarityManager.Settings.CategoryFetchers
+
+    local activeFetchers = {}
+    for _, cat in ipairs( allowedCategories ) do
+        local catLower = tostring( cat ):lower()
+        if fetchers[catLower] then
+            table.insert( activeFetchers, fetchers[catLower] )
+        end
+    end
+
+    if #activeFetchers == 0 then
+        for _, fetcher in pairs( fetchers ) do
+            table.insert( activeFetchers, fetcher )
+        end
+    end
+
+    local candidates = {}
+    for _, fetcher in ipairs( activeFetchers ) do
+        local items = fetcher( SpinManager.Settings.PoolSize, allowedTiers )
+        for _, item in ipairs( items ) do
+            table.insert( candidates, item )
+        end
+    end
+
+    if #candidates == 0 then
+        candidates = RarityManager.getRandomBlocks( SpinManager.Settings.PoolSize, allowedTiers )
+    end
+
+    if #candidates == 0 then
+        sm.log.error( "(Items Case) No items found for the specified rarities!" )
+        candidates = RarityManager.getRandomBlocks( SpinManager.Settings.PoolSize, nil )
+    end
+
+    for i = #candidates, 2, -1 do
+        local j = math.random( i )
+        candidates[i], candidates[j] = candidates[j], candidates[i]
+    end
+
+    local pool = {}
+    local poolSize = math.min( #candidates, SpinManager.Settings.PoolSize )
+    for i = 1, poolSize do
+        table.insert( pool, candidates[i] )
+    end
+
+    return pool
+end
+
+local function buildReel( self )
+    local itemPool = buildItemPool( self )
+    if #itemPool == 0 then
+        return {}
+    end
 
     local reelTape = {}
     for i = 1, SpinManager.Settings.ReelLength do
-        local block = blockPool[math.random( 1, #blockPool )]
+        local item = itemPool[math.random( 1, #itemPool )]
         table.insert( reelTape, {
-            uuid = block,
-            rarity = RarityManager.getRarity( block ),
-            quantity = RarityManager.getItemQuantity( block )
+            uuid = item,
+            rarity = RarityManager.getRarity( item ),
+            quantity = RarityManager.getItemQuantity( item )
         } )
     end
 
@@ -92,18 +144,16 @@ function SpinManager.sv_onPreviewRequest( self, params, player )
 end
 
 function SpinManager.sv_giveReward( self, player, itemUuid, quantity )
-    if not sm.exists( player ) then
-        return
-    end
+    if sm.exists( player ) then
+        sm.container.beginTransaction()
+        sm.container.collect( player:getInventory(), itemUuid, quantity, true )
 
-    sm.container.beginTransaction()
-    sm.container.collect( player:getInventory(), itemUuid, quantity )
+        if not sm.container.endTransaction() then
+            local char = player:getCharacter()
+            local dropPos = ( char and sm.exists( char ) ) and char.worldPosition or self.shape.worldPosition
 
-    if not sm.container.endTransaction() then
-        local char = player:getCharacter()
-        local dropPos = char and char.worldPosition or self.shape.worldPosition
-
-        SpawnLoot( player, { { uuid = itemUuid, quantity = quantity or 1, epic = false } }, dropPos, nil, 2 )
+            SpawnLoot( player, { { uuid = itemUuid, quantity = quantity, epic = false } }, dropPos, nil, 2 )
+        end
     end
 
     -- NotificationManager.Sv_SchematicUnlocked( itemUuid )

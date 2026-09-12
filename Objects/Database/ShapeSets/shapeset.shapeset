@@ -10,7 +10,7 @@
 			},
 			"color" : "df7f01",
 			"flammable" : false,
-			"name" : "obj_items_case",
+			"name" : "obj_items_case_high",
 			"physicsMaterial" : "Mechanical",
 			"ratings" : 
 			{
@@ -32,6 +32,12 @@
 						"epic",
 						"legendary",
 						"mythic"
+					],
+					"types" : 
+					[
+						"block",
+						"part",
+						"tool"
 					]
 				},
 				"filename" : "$CONTENT_DATA/Scripts/game/ItemsCase.lua"
@@ -45,9 +51,9 @@
 				"y" : 2,
 				"z" : 3
 			},
-			"color" : "df7f01ff",
+			"color" : "73543a",
 			"flammable" : false,
-			"name" : "obj_items_case",
+			"name" : "obj_items_case_scrap",
 			"physicsMaterial" : "Wood",
 			"ratings" : 
 			{
@@ -67,6 +73,12 @@
 					[
 						"common",
 						"uncommon"
+					],
+					"types" : 
+					[
+						"block",
+						"part",
+						"tool"
 					]
 				},
 				"filename" : "$CONTENT_DATA/Scripts/game/ItemsCase.lua"

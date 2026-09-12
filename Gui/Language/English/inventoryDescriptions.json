@@ -1,10 +1,10 @@
 {
-	"689a5481-ae07-435d-aef7-bfd92a4183e2" : 
-	{
-		"title" : "Items Case Scrap"
+	"689a5481-ae07-435d-aef7-bfd92a4183e2": {
+		"description": "Hastily thrown together from scrap, but there might still be some useful hardware inside.\n\nDrop chances:\n#D6D6D6• Common: 62.5%\n#00FF15• Uncommon: 37.5%\n\n#909191Created by: Xrisofor.",
+		"title": "Scrap Items Case"
 	},
-	"e40b3e04-b433-4581-a2b8-59b5088cf27e" : 
-	{
-		"title" : "Items Case"
+	"e40b3e04-b433-4581-a2b8-59b5088cf27e": {
+		"description": "A reinforced container packed with high-tier components, sturdy blocks, and tools.\n\nDrop chances:\n#0095FF• Rare: 64.3%\n#C200F9• Epic: 27.9%\n#FFA200• Legendary: 7.1%\n#F500FF• #CE25F8M#A74BF1y#8072EAt#5998E3h#32BFE0i#0CE5D9c#00FFD5: 0.7%\n\n#909191Created by: Xrisofor.",
+		"title": "Items Case"
 	}
 }
