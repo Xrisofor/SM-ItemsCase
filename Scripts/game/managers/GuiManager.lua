@@ -11,8 +11,17 @@ GuiManager.Settings = {
     CenterX = 600 / 2,
 }
 
+local function updateButton( self )
+    local button = FindWidget( GUI_JSON, "UnlockButton" )
+    local text = FindWidget( GUI_JSON, "UnlockText" )
+
+    button.Enabled = not self.cl.spinning
+    text.Caption = self.cl.spinning and "#{UNLOCKED}" or "#{UNLOCK}"
+end
+
 function GuiManager.cl_render( self )
     if self.cl.jsonGui then
+        updateButton( self )
         self.cl.jsonGui:render( GUI_JSON )
     end
 end

@@ -183,7 +183,9 @@ function SpinManager.sv_giveReward( self, player, itemUuid, quantity )
         end
     end
 
-    -- NotificationManager.Sv_SchematicUnlocked( itemUuid )
+    -- self.network:sendToClient( player, "client_onSpinFinished", {
+    --     uuid = itemUuid
+    -- } )
 
     sm.effect.playEffect( SpinManager.Settings.DestroyEffect, self.shape.worldPosition )
     self.shape:destroyShape( 0 )
@@ -235,6 +237,14 @@ function SpinManager.cl_onUpdate( self, deltaTime )
         self.cl.spinning = false
     end
 end
+
+-- function SpinManager.cl_onSpinFinished( self, data )
+--     if not data then
+--         return
+--     end
+
+--     sm.gui.displayAlertText( "#{DRESSBOT_BOX_COUNT_PART_1} " .. sm.shape.getShapeTitle( data.uuid ) )
+-- end
 
 function SpinManager.cl_onPreviewReel( self, data )
     self.cl.reel = data.reel

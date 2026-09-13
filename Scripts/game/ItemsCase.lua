@@ -80,6 +80,10 @@ function ItemsCase.client_onSpinStarted( self, data )
     SpinManager.cl_onSpinStarted( self, data )
 end
 
+-- function ItemsCase.client_onSpinFinished( self, data )
+--     SpinManager.cl_onSpinFinished( self, data )
+-- end
+
 function ItemsCase.client_onPreviewReel( self, data )
     SpinManager.cl_onPreviewReel( self, data )
 end
